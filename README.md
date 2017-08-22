@@ -1,4 +1,5 @@
-# react-eyepetizer-demon
+# react-scaffold
+> 根据vue脚手架项目改装
 
 ## description    
 **react脚手架** 项目，支持开发环境热更新，支持*eslint*实时检测 *(js|jsx)*
