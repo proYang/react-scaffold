@@ -2,13 +2,19 @@
  * @desc 入口文件
  */
 import React from 'react'
-import ReactDOM from 'react-dom'
+import { render } from 'react-dom'
 // import { Router } from 'react-router'
-// import { Provider } from 'react-redux'
+import { Provider } from 'react-redux'
+
+import store from '@/redux/store'
+import App from './containers/App'
+// import routes from '@/routes'
 // 将组件挂载
 const MOUNT_NODE = document.getElementById('app')
 
-ReactDOM.render(
-  <div>hello react</div>,
+render(
+  <Provider store={ store }>
+    <App />
+  </Provider>,
   MOUNT_NODE
 )

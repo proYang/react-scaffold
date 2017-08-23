@@ -1,5 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
 const config = require('./config')
 
 const env = process.env.NODE_ENV.trim() // 当前环境
@@ -30,12 +32,11 @@ module.exports = {
         exclude: /node_modules/
       },
       {
-        test: /\.css$/,
-        loader: 'style-loader!css-loader'
-      },
-      {
-        test: /\.less$/,
-        loader: 'style-loader!css-loader!less-loader'
+        test: /\.(css|less)$/,
+        loader: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: 'css-loader!less-loader'
+        })
       },
       {
         test: /\.json$/,

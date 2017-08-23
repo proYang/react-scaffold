@@ -10,18 +10,14 @@ const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const rootPath = path.resolve(__dirname, '..') // 项目根目录
 const src = path.join(rootPath, 'src') // 开发源码目录
 
+// add hot-reload related code to entry chunks
+Object.keys(baseConfig.entry).forEach(function (name) {
+  baseConfig.entry[name] = ['./build/dev-client'].concat(baseConfig.entry[name])
+})
+
 module.exports = merge(baseConfig, {
 
   devtool: config.dev.cssSourceMap ? 'eval-source-map' : false,
-
-  entry: {
-    app: [
-      'eventsource-polyfill',
-      'webpack-hot-middleware/client?reload=true',
-      'webpack/hot/only-dev-server',
-      config.dev.entryPath
-    ]
-  },
 
   output: {
     path: config.dev.distPath,
