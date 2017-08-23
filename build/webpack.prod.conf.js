@@ -51,7 +51,9 @@ let webpackConfig = merge(baseConfig, {
 
   plugins: [
     new webpack.DefinePlugin({
-      'process.env': { NODE_ENV: '"production"' }
+      'process.env': {
+        NODE_ENV: JSON.stringify('production')
+      }
     }),
     new webpack.optimize.ModuleConcatenationPlugin(), //Scope Hoisting
     new CopyWebpackPlugin([ // 复制静态资源
