@@ -4,7 +4,6 @@ const merge = require('webpack-merge')
 const config = require('./config')
 const baseConfig = require('./webpack.base.conf')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 
 const rootPath = path.resolve(__dirname, '..') // 项目根目录
@@ -16,6 +15,24 @@ Object.keys(baseConfig.entry).forEach(function (name) {
 })
 
 module.exports = merge(baseConfig, {
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        loader: ['react-hot-loader', 'babel-loader?cacheDirectory=true', 'eslint-loader'],
+        include: src,
+        exclude: /node_modules/
+      },
+      {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader'
+      },
+      {
+        test: /\.less$/,
+        loader: 'style-loader!css-loader!less-loader'
+      }
+    ]
+  },
 
   devtool: config.dev.cssSourceMap ? 'eval-source-map' : false,
 
@@ -26,7 +43,9 @@ module.exports = merge(baseConfig, {
   },
 
   plugins: [
-    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.DefinePlugin({
+      'process.env': { NODE_ENV: '"development"' }
+    }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new HtmlWebpackPlugin({

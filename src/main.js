@@ -13,7 +13,7 @@ import App from './containers/App'
 const MOUNT_NODE = document.getElementById('app')
 
 render(
-  <Provider store={ store }>
+  <Provider store={store}>
     <App />
   </Provider>,
   MOUNT_NODE

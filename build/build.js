@@ -21,7 +21,6 @@ rm(config.build.distPath, err => {
       chunks: false,
       chunkModules: false
     }) + '\n\n')
-
     console.log(chalk.cyan('  Build complete.\n'))
   })
 })

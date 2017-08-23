@@ -10,7 +10,36 @@ const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const config = require('./config')
 const baseConfig = require('./webpack.base.conf')
 
+const rootPath = path.resolve(__dirname, '..') // 项目根目录
+const src = path.join(rootPath, 'src') // 开发源码目录
+
 let webpackConfig = merge(baseConfig, {
+
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        loader: ['babel-loader', 'eslint-loader'],
+        include: src,
+        exclude: /node_modules/
+      },
+      {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: 'css-loader'
+        })
+      },
+      {
+        test: /\.less$/,
+        loader: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: 'css-loader!less-loader'
+        })
+      }
+    ]
+  },
+
   devtool: config.build.productionSourceMap ? 'eval-source-map' : false,
 
   output: {
@@ -21,7 +50,10 @@ let webpackConfig = merge(baseConfig, {
   },
 
   plugins: [
-    new webpack.optimize.ModuleConcatenationPlugin(),
+    new webpack.DefinePlugin({
+      'process.env': {NODE_ENV: '"production"'}
+    }),
+    new webpack.optimize.ModuleConcatenationPlugin(), //Scope Hoisting
     new CopyWebpackPlugin([ // 复制静态资源
       {
         context: config.build.assetsSubDirectory,
@@ -29,6 +61,9 @@ let webpackConfig = merge(baseConfig, {
       }
     ]),
     new webpack.optimize.UglifyJsPlugin({
+      output: {
+        comments: false,  
+      },
       compress: {
         warnings: false
       },
