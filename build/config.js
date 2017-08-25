@@ -5,7 +5,7 @@ const src = path.join(rootPath, 'src') // 开发源码目录
 
 module.exports = {
   build: {
-    entryPath: path.join(src, 'main.js'),
+    entryPath: path.join(src, 'app.jsx'),
     indexPath: path.join(src, 'index.html'),
     distPath: path.join(rootPath, 'dist'),
     staticPath: path.join(rootPath, './static'),
@@ -19,7 +19,7 @@ module.exports = {
     bundleAnalyzerReport: process.env.npm_config_report
   },
   dev: {
-    entryPath: path.join(src, 'main.js'),
+    entryPath: path.join(src, 'app.jsx'),
     indexPath: path.join(src, 'index.html'),
     distPath: path.join(rootPath, 'dist'),
     staticPath: path.join(rootPath, './static'),

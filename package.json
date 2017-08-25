@@ -13,11 +13,12 @@
   "author": "Slane Yang",
   "license": "ISC",
   "dependencies": {
+    "history": "^4.7.2",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.6",
-    "react-router": "^4.1.2",
-    "react-router-redux": "^4.0.8",
+    "react-router": "^4.2.0",
+    "react-router-redux": "^5.0.0-alpha.6",
     "redux": "^3.7.2"
   },
   "devDependencies": {
@@ -53,6 +54,7 @@
     "optimize-css-assets-webpack-plugin": "^3.1.1",
     "ora": "^1.3.0",
     "react-hot-loader": "^1.3.1",
+    "redux-thunk": "^2.2.0",
     "rimraf": "^2.6.1",
     "style-loader": "^0.18.2",
     "url-loader": "^0.5.9",
