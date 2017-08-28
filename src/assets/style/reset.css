@@ -102,12 +102,12 @@ input, select {
     vertical-align:middle;
 }
 
-.clearfix:before {
+:global(.clearfix:before) {
     display: table;
     content: " ";
 }
 
-.clearfix:after{
+:global(.clearfix:after) {
     display: table;
     content: " ";
     clear: both;

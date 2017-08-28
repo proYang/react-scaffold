@@ -29,5 +29,8 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {},
     cssSourceMap: false
+  },
+  common: {
+    minClassName: false // 是否开启css模块 https://www.npmjs.com/package/css-loader
   }
 }

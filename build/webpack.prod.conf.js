@@ -8,6 +8,7 @@ const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 
 
 const config = require('./config')
+const utils = require('./utils')
 const baseConfig = require('./webpack.base.conf')
 
 const rootPath = path.resolve(__dirname, '..') // 项目根目录
@@ -27,14 +28,39 @@ let webpackConfig = merge(baseConfig, {
         test: /\.css$/,
         loader: ExtractTextPlugin.extract({
           fallback: 'style-loader',
-          use: 'css-loader'
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                modules: config.common.minClassName,
+                getLocalIdent: (context, localIdentName, localName) => {
+                  return utils.generateScopedName(localName, context.resourcePath);
+                },
+                minimize: true
+              }
+            },
+            'postcss-loader'
+          ]
         })
       },
       {
         test: /\.less$/,
         loader: ExtractTextPlugin.extract({
           fallback: 'style-loader',
-          use: 'css-loader!less-loader'
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                modules: config.common.minClassName,
+                getLocalIdent: (context, localIdentName, localName) => {
+                  return utils.generateScopedName(localName, context.resourcePath);
+                },
+                minimize: true
+              }
+            },
+            'postcss-loader',
+            'less-loader'
+          ]
         })
       }
     ]

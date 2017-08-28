@@ -25,11 +25,27 @@ module.exports = merge(baseConfig, {
       },
       {
         test: /\.css$/,
-        loader: 'style-loader!css-loader'
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: config.common.minClassName
+            }
+          },
+          'postcss-loader']
       },
       {
         test: /\.less$/,
-        loader: 'style-loader!css-loader!less-loader'
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: config.common.minClassName
+            }
+          },
+          'postcss-loader', 'less-loader']
       }
     ]
   },

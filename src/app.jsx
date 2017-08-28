@@ -3,6 +3,7 @@
  */
 import { render } from 'react-dom'
 import Router from './router'
+import '@/assets/style/reset.css'
 
 // 将组件挂载
 const MOUNT_NODE = document.getElementById('app')
