@@ -31,6 +31,6 @@ module.exports = {
     cssSourceMap: false
   },
   common: {
-    minClassName: false // 是否开启css模块 https://www.npmjs.com/package/css-loader
+    minClassName: true // 是否开启css模块 https://www.npmjs.com/package/css-loader
   }
 }

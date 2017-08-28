@@ -4,14 +4,16 @@ import { Provider } from 'react-redux'
 import { ConnectedRouter } from 'react-router-redux'
 
 import { store, history } from './store'
-import Index from './containers/index'
+import Home from './containers/Home/index'
 
 export default (
   <Provider store={store}>
     { /* ConnectedRouter will use the store from Provider automatically */}
     <ConnectedRouter history={history}>
-      <Route path="/" component={Index}>
-      </Route>
+      <div>
+        <Route path="/" component={Home}></Route>
+        <Route path="detail/:id" component={Home}></Route>
+      </div>
     </ConnectedRouter>
   </Provider>
 
