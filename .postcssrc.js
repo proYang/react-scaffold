@@ -18,6 +18,7 @@ module.exports = {
     },
     // https://github.com/yisibl/postcss-aspect-ratio-mini 修正长宽比
     "postcss-aspect-ratio-mini": {},
+    // https://github.com/jonathantneal/postcss-write-svg
     "postcss-write-svg": {} // 解决1px的问题
   }
 }

@@ -29,16 +29,7 @@ let webpackConfig = merge(baseConfig, {
         loader: ExtractTextPlugin.extract({
           fallback: 'style-loader',
           use: [
-            {
-              loader: 'css-loader',
-              options: {
-                modules: config.common.minClassName,
-                getLocalIdent: (context, localIdentName, localName) => {
-                  return utils.generateScopedName(localName, context.resourcePath);
-                },
-                minimize: true
-              }
-            },
+            'css-loader',
             'postcss-loader'
           ]
         })

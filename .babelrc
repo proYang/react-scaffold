@@ -6,10 +6,12 @@
   ],
   "plugins": [
     "transform-runtime",
+    "react-hot-loader/babel",
     [
       "import",
-      { 
-        "libraryName": "antd"
+      {
+        "libraryName": "antd",
+        "style": "css"
       }
     ]
   ],

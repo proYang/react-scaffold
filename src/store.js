@@ -1,6 +1,6 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
 import createHistory from 'history/createBrowserHistory'
-import { routerReducer, routerMiddleware } from 'react-router-redux'
+import { routerMiddleware } from 'react-router-redux'
 import thunk from 'redux-thunk'
 
 import reducers from './reducers' // Or wherever you keep your reducers
@@ -16,13 +16,27 @@ const middlewares = [
 
 // Add the reducer to your store on the `router` key
 // Also apply our middleware for navigating
-const store = createStore(
-  combineReducers({
-    ...reducers,
-    router: routerReducer
-  }),
-  applyMiddleware(...middlewares)
-)
+let store
+if (process.env.NODE_ENV === 'production') {
+  store = createStore(
+    reducers,
+    applyMiddleware(...middlewares)
+  )
+}
+else {
+  store = createStore(
+    reducers,
+    window.devToolsExtension ? window.devToolsExtension() : undefined,
+    applyMiddleware(...middlewares)
+  )
+  if (module.hot) {
+    module.hot.accept('./reducers', () => {
+      const nextReducers = require('./reducers').default
+      store.replaceReducer(nextReducers)
+    })
+  }
+}
+
 
 export {
   store,

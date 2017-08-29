@@ -1,0 +1,35 @@
+
+.sidebarBox{
+  position: fixed;
+  transform: translateZ(0);
+  height: 100%;
+  overflow: auto;
+  width: 290px;
+  left: -290px;
+  z-index: 99;
+  top: 0;
+  bottom: 0;
+  background-color: #f2f2f2;
+  transition: all .3s ease;
+  &.showSidebar{
+    transform: translateX(290px);
+  }
+}
+.tittle {
+  height: 100px;
+  line-height: 100px;
+  font-size: 50px;
+  background-color:#00a2ea;
+  color: #fff;
+  text-align: center;
+}
+.sidebarMask {
+  position: fixed;
+  transform: translateZ(0);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 5;
+  background: rgba(0,0,0,.7);
+}

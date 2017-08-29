@@ -19,7 +19,7 @@ module.exports = merge(baseConfig, {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        loader: ['react-hot-loader', 'babel-loader?cacheDirectory=true', 'eslint-loader'],
+        loader: ['babel-loader?cacheDirectory=true', 'eslint-loader'],
         include: src,
         exclude: /node_modules/
       },
@@ -27,13 +27,9 @@ module.exports = merge(baseConfig, {
         test: /\.css$/,
         use: [
           'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              modules: config.common.minClassName
-            }
-          },
-          'postcss-loader']
+          'css-loader',
+          'postcss-loader'
+        ]
       },
       {
         test: /\.less$/,

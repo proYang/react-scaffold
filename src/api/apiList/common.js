@@ -1,9 +1,17 @@
 import api from '../config'
 
 /**
- * @desc 上传资源至七牛云
+ * @desc 主题日报列表
  * @param {Object} body
  */
-export const uploadImage = (body) => {
-  return api.post('http://upload.qiniu.com/', body)
+export const fetchThemeList = () => {
+  return api.get('/api/4/themes')
+}
+
+/**
+ * @desc 主题日报内容查看
+ * @param {Object} body
+ */
+export const fetchThemeContent = (id) => {
+  return api.get(`/api/4/theme/${id}`)
 }
