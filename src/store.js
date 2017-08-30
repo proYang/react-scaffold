@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware } from 'redux'
 import createHistory from 'history/createBrowserHistory'
-import { routerMiddleware } from 'react-router-redux'
+import { routerMiddleware, routerActions } from 'react-router-redux'
 import thunk from 'redux-thunk'
 
 import reducers from './reducers' // Or wherever you keep your reducers
@@ -39,6 +39,7 @@ else {
 
 
 export {
+  routerActions,
   store,
-  history
+  history,
 }

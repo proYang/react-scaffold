@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { store, routerActions } from '../../store.js'
 import PropTypes from 'prop-types'
 import { Icon } from 'antd'
 
@@ -26,7 +27,7 @@ class Sidebar extends Component {
             <Icon type="appstore-o" />
           </div>
           <ul>
-            <li onClick={() => this.handleItemClick()}></li>
+            <li onClick={() => this.handleItemClick()}>首页</li>
             {this.props.list.map((item, index) =>
               <li key={index} onClick={() => this.handleItemClick(item.id)}>
                 {item.name}
@@ -46,9 +47,10 @@ class Sidebar extends Component {
 
   handleItemClick(id) {
     if (id) {
-      this.context.router.push('/')
+      store.dispatch(routerActions.push(`/theme/${id}`))
     } else {
-      this.context.router.push('/')
+      store.dispatch(routerActions.push('/'))
+      this.handleToggleSidebar()
     }
   }
 }
