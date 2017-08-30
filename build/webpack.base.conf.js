@@ -3,8 +3,8 @@ const webpack = require('webpack')
 
 const config = require('./config')
 
-const rootPath = path.resolve(__dirname, '..') // 项目根目录
-const src = path.join(rootPath, 'src') // 开发源码目录
+const rootPath = config.build.rootPath // 项目根目录
+const src = config.build.src // 开发源码目录
 const node_modules = path.join(rootPath, 'node_modules') //模块库地址
 
 module.exports = {

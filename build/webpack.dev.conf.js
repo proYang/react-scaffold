@@ -6,8 +6,8 @@ const baseConfig = require('./webpack.base.conf')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 
-const rootPath = path.resolve(__dirname, '..') // 项目根目录
-const src = path.join(rootPath, 'src') // 开发源码目录
+const rootPath = config.dev.rootPath // 项目根目录
+const src = config.dev.src // 开发源码目录
 
 // add hot-reload related code to entry chunks
 Object.keys(baseConfig.entry).forEach(function (name) {
@@ -38,7 +38,7 @@ module.exports = merge(baseConfig, {
           {
             loader: 'css-loader',
             options: {
-              modules: config.common.minClassName
+              modules: config.dev.minClassName
             }
           },
           'postcss-loader', 'less-loader']

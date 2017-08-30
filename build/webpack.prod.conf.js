@@ -11,8 +11,8 @@ const config = require('./config')
 const utils = require('./utils')
 const baseConfig = require('./webpack.base.conf')
 
-const rootPath = path.resolve(__dirname, '..') // 项目根目录
-const src = path.join(rootPath, 'src') // 开发源码目录
+const rootPath = config.build.rootPath // 项目根目录
+const src = config.build.src // 开发源码目录
 
 let webpackConfig = merge(baseConfig, {
 
@@ -42,7 +42,7 @@ let webpackConfig = merge(baseConfig, {
             {
               loader: 'css-loader',
               options: {
-                modules: config.common.minClassName,
+                modules: config.build.minClassName,
                 getLocalIdent: (context, localIdentName, localName) => {
                   return utils.generateScopedName(localName, context.resourcePath);
                 },

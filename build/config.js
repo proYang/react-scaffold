@@ -5,6 +5,9 @@ const src = path.join(rootPath, 'src') // 开发源码目录
 
 module.exports = {
   build: {
+    rootPath, // 项目根目录
+    src, // 开发源码目录
+    minClassName: true, // 是否开启css模块 https://www.npmjs.com/package/css-loader
     entryPath: path.join(src, 'app.jsx'),
     indexPath: path.join(src, 'index.html'),
     distPath: path.join(rootPath, 'dist'),
@@ -19,6 +22,9 @@ module.exports = {
     bundleAnalyzerReport: process.env.npm_config_report
   },
   dev: {
+    rootPath, // 项目根目录
+    src, // 开发源码目录
+    minClassName: true, // 是否开启css模块 https://www.npmjs.com/package/css-loader
     entryPath: path.join(src, 'app.jsx'),
     indexPath: path.join(src, 'index.html'),
     distPath: path.join(rootPath, 'dist'),
@@ -37,8 +43,5 @@ module.exports = {
       }
     },
     cssSourceMap: false
-  },
-  common: {
-    minClassName: true // 是否开启css模块 https://www.npmjs.com/package/css-loader
   }
 }

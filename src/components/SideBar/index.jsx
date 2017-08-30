@@ -7,10 +7,9 @@ import { Icon } from 'antd'
 import { toggleSidebar, fetchThemeList } from '../../actions/sidebar'
 import style from './style.less'
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state) => ({
   list: state.sidebar.list,
   active: state.sidebar.active,
-  router: ownProps
 })
 
 class Sidebar extends Component {
@@ -48,8 +47,9 @@ class Sidebar extends Component {
   handleItemClick(id) {
     if (id) {
       store.dispatch(routerActions.push(`/theme/${id}`))
+      this.handleToggleSidebar()
     } else {
-      store.dispatch(routerActions.push('/'))
+      store.dispatch(routerActions.push('/index'))
       this.handleToggleSidebar()
     }
   }
@@ -58,8 +58,7 @@ class Sidebar extends Component {
 Sidebar.propTypes = {
   list: PropTypes.array.isRequired,
   active: PropTypes.bool.isRequired,
-  dispatch: PropTypes.func.isRequired,
-  router: PropTypes.object.isRequired
+  dispatch: PropTypes.func.isRequired
 }
 
 export default connect(mapStateToProps)(Sidebar)
