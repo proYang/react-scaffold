@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route,  } from 'react-router'
+import { Route, } from 'react-router'
 import { Provider } from 'react-redux'
 import { ConnectedRouter } from 'react-router-redux'
 
@@ -16,7 +16,7 @@ export default class App extends React.Component {
         { /* ConnectedRouter will use the store from Provider automatically */}
         <ConnectedRouter history={history}>
           <div>
-            <Route path="/index" component={Home} />
+            <Route path="/" component={Home} />
             <Route path="/theme/:id" component={Home} />
             <Route path="/detail/:id" component={Details} />
           </div>
