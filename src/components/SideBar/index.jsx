@@ -49,7 +49,7 @@ class Sidebar extends Component {
       store.dispatch(routerActions.push(`/theme/${id}`))
       this.handleToggleSidebar()
     } else {
-      store.dispatch(routerActions.push('/index'))
+      store.dispatch(routerActions.push('/'))
       this.handleToggleSidebar()
     }
   }
