@@ -70,6 +70,7 @@
     "react-hot-loader": "^3.0.0-beta.7",
     "redux-thunk": "^2.2.0",
     "rimraf": "^2.6.1",
+    "snabbt.js": "^0.6.4",
     "style-loader": "^0.18.2",
     "url-loader": "^0.5.9",
     "webpack": "^3.5.5",
