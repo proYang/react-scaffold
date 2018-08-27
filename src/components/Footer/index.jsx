@@ -22,12 +22,10 @@ class Footer extends Component {
     // let { dispatch } = this.props
   }
   render() {
-    return (
-      <div className={style.footer}>
-        <img ref={(img) => { this.icon = img }} className={style.icon} src={publishImg} onClick={this.handleClick.bind(this)} />
-        <h2>首页</h2>
-      </div>
-    )
+    return <div className={style.footer}>
+      <img ref={(img) => { this.icon = img }} className={style.icon} src={publishImg} onClick={this.handleClick.bind(this)} />
+      <h2>首页</h2>
+    </div>
   }
   handleClick() {
     if(this.iconActive === true) {
@@ -46,7 +44,7 @@ class Footer extends Component {
       })
       this.iconActive = true
     }
-    
+
   }
 }
 

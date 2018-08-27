@@ -17,12 +17,10 @@ class HomeHeader extends Component {
     dispatch(toggleSidebar())
   }
   render() {
-    return (
-      <div className={style.header}>
-        <Icon className={style.icon} onClick={() => this.handleToggleSidebar()} type="menu-fold" />
-        <h2 className={style.title}>首页</h2>
-      </div>
-    )
+    return <div className={style.header}>
+      <Icon className={style.icon} onClick={() => this.handleToggleSidebar()} type="menu-fold" />
+      <h2 className={style.title}>首页</h2>
+    </div>
   }
 }
 

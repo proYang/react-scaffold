@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 class Container extends Component {
-  componentWillReceiveProps(){
-    console.log(this.props)
+  getSnapshotBeforeUpdate(prevProps, prevState){
+    console.log(prevProps, prevState)
   }
   render() {
     return (

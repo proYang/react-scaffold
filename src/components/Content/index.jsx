@@ -4,16 +4,14 @@ import { withRouter } from 'react-router'
 
 class HomeContent extends Component {
   render() {
-    return (
-      <div>
-        <p>COnten</p>
-        <p>The list page id is
-          <b style={{ color: 'red' }}>{this.props.id}</b>
-          <b style={{ color: 'green' }}>{this.props.match.params.id}</b>
-          <button onClick={()=>this.props.history.go(-1)}>back</button>
-        </p>
-      </div>
-    )
+    return <div>
+      <p>COnten</p>
+      <p>The list page id is
+        <b style={{ color: 'red' }}>{this.props.id}</b>
+        <b style={{ color: 'green' }}>{this.props.match.params.id}</b>
+        <button onClick={()=>this.props.history.go(-1)}>back</button>
+      </p>
+    </div>
   }
 }
 

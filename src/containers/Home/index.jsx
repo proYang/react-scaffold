@@ -9,14 +9,12 @@ import Footer from '@/components/Footer/index'
 
 class Home extends Component {
   render() {
-    return (
-      <div className={style.container}>
-        <HomeHeader />
-        <Sidebar />
-        <Content id={this.props.match.params.id}/>
-        <Footer />
-      </div>
-    )
+    return <div className={style.container}>
+      <HomeHeader />
+      <Sidebar />
+      <Content id={this.props.match.params.id}/>
+      <Footer />
+    </div>
   }
 }
 

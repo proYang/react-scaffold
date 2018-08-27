@@ -13,30 +13,28 @@ const mapStateToProps = (state) => ({
 })
 
 class Sidebar extends Component {
-  componentWillMount() {
+  componentDidMount() {
     let { dispatch } = this.props
     dispatch(fetchThemeList())
   }
 
   render() {
-    return (
-      <div>
-        <div className={`${style.sidebarBox} ${this.props.active ? style.showSidebar : ''}`}>
-          <div className={style.tittle}>
-            <Icon type="appstore-o" />
-          </div>
-          <ul>
-            <li onClick={() => this.handleItemClick()}>首页</li>
-            {this.props.list.map((item, index) =>
-              <li key={index} onClick={() => this.handleItemClick(item.id)}>
-                {item.name}
-              </li>
-            )}
-          </ul>
+    return <div>
+      <div className={`${style.sidebarBox} ${this.props.active ? style.showSidebar : ''}`}>
+        <div className={style.tittle}>
+          <Icon type="appstore-o" />
         </div>
-        <div className={this.props.active ? style.sidebarMask : ''} onClick={() => this.handleToggleSidebar()}></div>
+        <ul>
+          <li onClick={() => this.handleItemClick()}>首页</li>
+          {this.props.list.map((item, index) =>
+            <li key={index} onClick={() => this.handleItemClick(item.id)}>
+              {item.name}
+            </li>
+          )}
+        </ul>
       </div>
-    )
+      <div className={this.props.active ? style.sidebarMask : ''} onClick={() => this.handleToggleSidebar()}></div>
+    </div>
   }
 
   handleToggleSidebar() {
