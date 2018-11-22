@@ -8,6 +8,7 @@ const src = config.build.src // 开发源码目录
 const node_modules = path.join(rootPath, 'node_modules') //模块库地址
 
 module.exports = {
+  mode: 'development',
   entry: {
     app: config.dev.entryPath
   },

@@ -19,6 +19,7 @@ class Sidebar extends Component {
   }
 
   render() {
+    const { list } = this.props
     return <div>
       <div className={`${style.sidebarBox} ${this.props.active ? style.showSidebar : ''}`}>
         <div className={style.tittle}>
@@ -26,9 +27,9 @@ class Sidebar extends Component {
         </div>
         <ul>
           <li onClick={() => this.handleItemClick()}>首页</li>
-          {this.props.list.map((item, index) =>
-            <li key={index} onClick={() => this.handleItemClick(item.id)}>
-              {item.name}
+          {list.map((item) =>
+            <li key={item.news_id} onClick={() => this.handleItemClick(item.news_id)}>
+              {item.title}
             </li>
           )}
         </ul>

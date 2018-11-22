@@ -10,7 +10,6 @@ const mapStateToProps = () => ({
 
 class HomeHeader extends Component {
   componentDidMount() {
-
   }
   handleToggleSidebar() {
     let { dispatch } = this.props

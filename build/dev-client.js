@@ -1,4 +1,3 @@
 /* eslint-disable */
 require('eventsource-polyfill')
-require('react-hot-loader/patch')
-require('webpack-hot-middleware/client?noInfo=true&reload=true')
+require('webpack-hot-middleware/client?path=/__webpack_hmr&timeout=2000&overlay=false&reload=true&overlayWarnings=true')

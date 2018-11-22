@@ -24,7 +24,7 @@ export function updateThemeList(data) {
 export function fetchThemeList() {
   return function (dispatch) {
     api.fetchThemeList().then(function (res) {
-      dispatch(updateThemeList(res.others))
+      dispatch(updateThemeList(res.recent))
     })
   }
 }

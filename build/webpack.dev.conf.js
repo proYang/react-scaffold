@@ -15,6 +15,7 @@ Object.keys(baseConfig.entry).forEach(function (name) {
 })
 
 module.exports = merge(baseConfig, {
+  mode: 'development',
   module: {
     rules: [
       {
@@ -46,7 +47,7 @@ module.exports = merge(baseConfig, {
     ]
   },
 
-  devtool: config.dev.cssSourceMap ? 'eval-source-map' : false,
+  devtool: 'eval-source-map',
 
   output: {
     path: config.dev.distPath,
@@ -55,13 +56,7 @@ module.exports = merge(baseConfig, {
   },
 
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('development')
-      }
-    }),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin(),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: config.dev.indexPath,

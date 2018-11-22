@@ -1,14 +1,13 @@
 {
   "presets": [
-    ["env", {
-      "modules": false
-    }],
-    "react",
-    "stage-2"
+    "@babel/preset-env",
+    "@babel/preset-react"
   ],
   "plugins": [
-    "transform-runtime",
-    "react-hot-loader/babel", [
+    "@babel/plugin-transform-runtime",
+    "@babel/plugin-syntax-dynamic-import",
+    "react-hot-loader/babel",
+    [
       "import",
       {
         "libraryName": "antd",
@@ -16,12 +15,5 @@
       }
     ]
   ],
-  "comments": false,
-  "env": {
-    "production": {
-      "presets": [
-        "react-optimize"
-      ]
-    }
-  }
+  "comments": false
 }

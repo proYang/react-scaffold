@@ -2,7 +2,7 @@ import React from 'react'
 import { Route, } from 'react-router'
 import { Provider } from 'react-redux'
 import { ConnectedRouter } from 'react-router-redux'
-
+import { hot } from 'react-hot-loader'
 import { store, history } from './store'
 
 // 按路由拆分代码
@@ -23,7 +23,7 @@ const Details = Loadable({
 // import Container from './containers/Container'
 // import Details from './containers/Details/index'
 
-export default class App extends React.Component {
+class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
@@ -39,3 +39,5 @@ export default class App extends React.Component {
     )
   }
 }
+
+export default hot(module)(App)

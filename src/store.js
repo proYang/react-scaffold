@@ -1,4 +1,5 @@
 import { createStore, applyMiddleware } from 'redux'
+import { composeWithDevTools } from 'redux-devtools-extension'
 import createHistory from 'history/createBrowserHistory'
 import { routerMiddleware, routerActions } from 'react-router-redux'
 import thunk from 'redux-thunk'
@@ -7,6 +8,10 @@ import reducers from './reducers' // Or wherever you keep your reducers
 
 // Create a history of your choosing (we're using a browser history in this case)
 const history = createHistory()
+
+const composeEnhancers = composeWithDevTools({
+// Specify name here, actionsBlacklist, actionsCreators and other options if needed
+})
 
 // Build the middleware for intercepting and dispatching navigation actions
 const middlewares = [
@@ -20,14 +25,15 @@ let store
 if (process.env.NODE_ENV === 'production') {
   store = createStore(
     reducers,
-    applyMiddleware(...middlewares)
+    applyMiddleware(...middlewares),
   )
 }
 else {
   store = createStore(
     reducers,
-    window.devToolsExtension ? window.devToolsExtension() : undefined,
-    applyMiddleware(...middlewares)
+    composeEnhancers(
+      applyMiddleware(...middlewares)
+    )
   )
   if (module.hot) {
     module.hot.accept('./reducers', () => {

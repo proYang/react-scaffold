@@ -3,8 +3,9 @@ const merge = require('webpack-merge')
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 
 const config = require('./config')
@@ -16,6 +17,7 @@ const src = config.build.src // 开发源码目录
 
 let webpackConfig = merge(baseConfig, {
 
+  mode: 'production',
   module: {
     rules: [
       {
@@ -26,33 +28,29 @@ let webpackConfig = merge(baseConfig, {
       },
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
+        use: [
+            MiniCssExtractPlugin.loader,
             'css-loader',
             'postcss-loader'
           ]
-        })
       },
       {
         test: /\.less$/,
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            {
-              loader: 'css-loader',
-              options: {
-                modules: config.build.minClassName,
-                getLocalIdent: (context, localIdentName, localName) => {
-                  return utils.generateScopedName(localName, context.resourcePath);
-                },
-                minimize: true
-              }
-            },
-            'postcss-loader',
-            'less-loader'
-          ]
-        })
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              modules: config.build.minClassName,
+              getLocalIdent: (context, localIdentName, localName) => {
+                return utils.generateScopedName(localName, context.resourcePath);
+              },
+              minimize: true
+            }
+          },
+          'postcss-loader',
+          'less-loader'
+        ]
       }
     ]
   },
@@ -66,12 +64,25 @@ let webpackConfig = merge(baseConfig, {
     filename: 'js/[name].[chunkhash].js'
   },
 
+  optimization: {
+    splitChunks: {
+    	chunks: "all",
+    	maxInitialRequests: 20, // for HTTP2
+    	maxAsyncRequests: 20, // for HTTP2
+    	minSize: 40 // for example only: chosen to match 2 modules
+    	// omit minSize in real use case to use the default of 30kb
+    },
+  	minimizer: [
+  		new UglifyJsPlugin({
+  			cache: true,
+  			parallel: true,
+  			sourceMap: true // set to true if you want JS source maps
+  		}),
+  		new OptimizeCSSAssetsPlugin({})
+  	]
+  },
+
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('production')
-      }
-    }),
     new webpack.optimize.ModuleConcatenationPlugin(), //Scope Hoisting
     new CopyWebpackPlugin([ // 复制静态资源
       {
@@ -79,34 +90,12 @@ let webpackConfig = merge(baseConfig, {
         from: '**/*'
       }
     ]),
-    new webpack.optimize.UglifyJsPlugin({
-      // 最紧凑的输出
-      beautify: false,
-      // 删除所有的注释
-      comments: false,
-      compress: {
-        // 在UglifyJs删除没有用到的代码时不输出警告
-        warnings: false,
-        // 删除所有的 `console` 语句
-        // 还可以兼容ie浏览器
-        drop_console: true,
-        // 内嵌定义了但是只用到一次的变量
-        collapse_vars: true,
-        // 提取出出现多次但是没有定义成变量去引用的静态值
-        reduce_vars: true,
-      },
-      sourceMap: config.build.productionSourceMap
-    }),
     // extract css into its own file
-    new ExtractTextPlugin({
-      filename: 'css/[name].[contenthash].css'
-    }),
-    // Compress extracted CSS. We are using this plugin so that possible
-    // duplicated CSS from different components can be deduped.
-    new OptimizeCSSPlugin({
-      cssProcessorOptions: {
-        safe: true
-      }
+    new MiniCssExtractPlugin({
+    	// Options similar to the same options in webpackOptions.output
+    	// both options are optional
+    	filename: "[name].[hash].css",
+    	chunkFilename: "[id].[hash].css"
     }),
     // generate dist index.html with correct asset hash for caching.
     // you can customize output by editing /index.html
@@ -125,28 +114,9 @@ let webpackConfig = merge(baseConfig, {
       // necessary to consistently work with multiple chunks via CommonsChunkPlugin
       chunksSortMode: 'dependency'
     }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      minChunks: function (module, count) {
-        // any required modules inside node_modules are extracted to vendor
-        return (
-          module.resource &&
-          /\.js$/.test(module.resource) &&
-          module.resource.indexOf(
-            path.join(__dirname, '../node_modules')
-          ) === 0
-        )
-      }
-    }),
-    // extract webpack runtime and module manifest to its own file in order to
-    // prevent vendor hash from being updated whenever app bundle is updated
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'manifest',
-      chunks: ['vendor']
-    }),
     new webpack.optimize.AggressiveMergingPlugin(),
     new webpack.optimize.MinChunkSizePlugin({
-      minChunkSize: 30000
+      minChunkSize: 10000
     })
   ]
 })

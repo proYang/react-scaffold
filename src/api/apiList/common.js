@@ -5,7 +5,7 @@ import api from '../config'
  * @param {Object} body
  */
 export const fetchThemeList = () => {
-  return api.get('/api/4/themes')
+  return api.get('/api/3/news/hot')
 }
 
 /**
