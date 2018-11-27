@@ -1,7 +1,7 @@
 import React from 'react'
-import { Route, } from 'react-router'
+import { Route, Switch } from 'react-router'
 import { Provider } from 'react-redux'
-import { ConnectedRouter } from 'react-router-redux'
+import { ConnectedRouter } from 'connected-react-router'
 import { hot } from 'react-hot-loader'
 import { store, history } from './store'
 
@@ -30,9 +30,11 @@ class App extends React.Component {
         { /* ConnectedRouter will use the store from Provider automatically */}
         <ConnectedRouter history={history}>
           <div>
-            <Route path="/" exact component={Home} />
-            <Route path="/theme/:id" component={Home} />
-            <Route path="/detail/:id" component={Details} />
+            <Switch>
+              <Route path="/" exact component={Home} />
+              <Route path="/theme/:id" component={Home} />
+              <Route path="/detail/:id" component={Details} />
+            </Switch>
           </div>
         </ConnectedRouter>
       </Provider>

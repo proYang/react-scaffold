@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux'
-import { routerReducer } from 'react-router-redux'
+import { connectRouter } from 'connected-react-router'
 
 import modal from './modal'
 import sidebar from './sidebar'
 
-export default combineReducers({
+export default (history) => combineReducers({
+  router: connectRouter(history),
   modal,
   sidebar,
-  routing: routerReducer
 })

@@ -25,8 +25,8 @@ class Sidebar extends Component {
         <div className={style.tittle}>
           <Icon type="appstore-o" />
         </div>
+        <div onClick={() => this.handleItemClick(2333)}>首页2333</div>
         <ul>
-          <li onClick={() => this.handleItemClick()}>首页</li>
           {list.map((item) =>
             <li key={item.news_id} onClick={() => this.handleItemClick(item.news_id)}>
               {item.title}

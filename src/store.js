@@ -1,13 +1,13 @@
-import { createStore, applyMiddleware } from 'redux'
+import { applyMiddleware, compose, createStore } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
-import createHistory from 'history/createBrowserHistory'
-import { routerMiddleware, routerActions } from 'react-router-redux'
+import { createBrowserHistory } from 'history'
+import { routerMiddleware, routerActions } from 'connected-react-router'
 import thunk from 'redux-thunk'
 
-import reducers from './reducers' // Or wherever you keep your reducers
+import createRootReducer from './reducers'
 
 // Create a history of your choosing (we're using a browser history in this case)
-const history = createHistory()
+const history = createBrowserHistory()
 
 const composeEnhancers = composeWithDevTools({
 // Specify name here, actionsBlacklist, actionsCreators and other options if needed
@@ -24,21 +24,22 @@ const middlewares = [
 let store
 if (process.env.NODE_ENV === 'production') {
   store = createStore(
-    reducers,
-    applyMiddleware(...middlewares),
+    createRootReducer(history),
+    compose(
+      applyMiddleware(...middlewares)
+    ),
   )
 }
 else {
   store = createStore(
-    reducers,
+    createRootReducer(history),
     composeEnhancers(
       applyMiddleware(...middlewares)
     )
   )
   if (module.hot) {
     module.hot.accept('./reducers', () => {
-      const nextReducers = require('./reducers').default
-      store.replaceReducer(nextReducers)
+      store.replaceReducer(createRootReducer(history))
     })
   }
 }
