@@ -3,9 +3,9 @@ const merge = require('webpack-merge')
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 
 
 const config = require('./config')
@@ -29,10 +29,10 @@ let webpackConfig = merge(baseConfig, {
       {
         test: /\.css$/,
         use: [
-            MiniCssExtractPlugin.loader,
-            'css-loader',
-            'postcss-loader'
-          ]
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'postcss-loader'
+        ]
       },
       {
         test: /\.less$/,
@@ -43,7 +43,7 @@ let webpackConfig = merge(baseConfig, {
             options: {
               modules: config.build.minClassName,
               getLocalIdent: (context, localIdentName, localName) => {
-                return utils.generateScopedName(localName, context.resourcePath);
+                return utils.generateScopedName(localName, context.resourcePath)
               },
               minimize: true
             }
@@ -66,7 +66,7 @@ let webpackConfig = merge(baseConfig, {
 
   optimization: {
     splitChunks: {
-    	chunks: "all",
+    	chunks: 'all',
     	maxInitialRequests: 20, // for HTTP2
     	maxAsyncRequests: 20, // for HTTP2
     	minSize: 40 // for example only: chosen to match 2 modules
@@ -94,8 +94,8 @@ let webpackConfig = merge(baseConfig, {
     new MiniCssExtractPlugin({
     	// Options similar to the same options in webpackOptions.output
     	// both options are optional
-    	filename: "[name].[hash].css",
-    	chunkFilename: "[id].[hash].css"
+    	filename: '[name].[hash].css',
+    	chunkFilename: '[id].[hash].css'
     }),
     // generate dist index.html with correct asset hash for caching.
     // you can customize output by editing /index.html
