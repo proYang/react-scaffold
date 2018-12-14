@@ -1,10 +1,10 @@
 const Router = require('koa-router')
 
 const router = new Router({
-  prefix: '/'
+  prefix: '/api/3/'
 })
 
-router.get('/api', (ctx, next) => {
+router.get('/news/hot', (ctx, next) => {
   const res = {
     msg: 'hello',
     success: true,

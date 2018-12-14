@@ -8,8 +8,9 @@ const router = new Router({
 
 const templatePath = path.resolve(__dirname, '../../dist/index.html')
 
+// support SPA
 router.get('/', (ctx) => {
-  ctx.response.type = 'html'
+  ctx.type = 'html'
   ctx.body = fs.createReadStream(templatePath)
 })
 

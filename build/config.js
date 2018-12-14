@@ -13,7 +13,7 @@ module.exports = {
     distPath: path.join(rootPath, 'dist'),
     staticPath: path.join(rootPath, './static'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: './',
+    assetsPublicPath: '/',
     productionSourceMap: false,
     // Run the build command with an extra argument to
     // View the bundle analyzer report after build finishes:
