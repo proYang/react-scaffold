@@ -23,7 +23,9 @@ class Footer extends Component {
   }
   render() {
     return <div className={style.footer}>
-      <img ref={(img) => { this.icon = img }} className={style.icon} src={publishImg} onClick={this.handleClick.bind(this)} />
+      <div className={style.icon}>
+        <img ref={(img) => { this.icon = img }} className={style.iconImg} src={publishImg} onClick={this.handleClick.bind(this)} />
+      </div>
       <h2>首页</h2>
     </div>
   }
